@@ -41,3 +41,5 @@ can design and implement the API however you want. Of course, we'd also like to 
 * You have to push the code on your Github account and make a pull request to YakimbiICT/php_dev_interview_assignment repo.
 * Not required, but it would be great if you can host the app on the Internet so that we can play
   with it without having to install/configure it. ;-) 
+
+**IF YOU CAN'T USE A PUBLIC REPO ON GITHUB, USE BITCUCKET [[ https://bitbucket.org/ ]] AND SET UP A PRIVATE REPO**
