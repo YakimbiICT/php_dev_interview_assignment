@@ -1,0 +1,5 @@
+### Install :
+
+1. upload application folder to your web space
+2. create a new mysql database and import db.sql file to it
+3. edit config.php file with new database info

@@ -1,0 +1,36 @@
+## API Request
+
+All requests should be send to api.php file with parameters as explained Below. 
+Response type is json
+
+
+### Get Favorite Images
+
+action : favorites_get
+
+
+### Get Random Images
+
+action : get_random
+
+### Favorite an image
+
+action : favorite_it
+img_data : {
+                thumb :  'VAL'  //thumbnail URL
+                url : 'VAL'        // Image URL
+                description : 'VAL'  // Image Description
+}
+
+### Delete Favorite Image
+
+action : favorite_del
+id : 'ID'  // Image ID
+
+## Edit Favorite Image 
+
+action: favorite_edit
+img_data : {
+            id : 'ID' // Image ID
+            description : 'VAL' // Image Description
+}
