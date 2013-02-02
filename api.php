@@ -11,8 +11,8 @@ require("./global.php");
 $action = $_REQUEST['action'];
 
 try {
-    $ajax = new ajax();
-    print $ajax->get($action);
+    $api = new api();
+    print $api->get($action);
 } catch (Exception $e) {
     die($e->getMessage());
 }
