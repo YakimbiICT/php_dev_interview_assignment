@@ -17,7 +17,8 @@ class Imact_Controller_Favorite extends Imact_Controller_Base{
 
 	public function read(){
 		$this->view->enableFav = true;
-		$this->view->data = $this->model->readFavorites();
+		$id = (self::$input['id'] ? self::$input['id'] : "" );
+		$this->view->data = $this->model->readFavorites($id);
 	}
 
 	public function __call($name, $arguments){
