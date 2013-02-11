@@ -1,0 +1,62 @@
+{
+    "hash": "da27d32cb39aa31de53168cb7b095104",
+    "packages": [
+        {
+            "name": "twig/twig",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/fabpot/Twig.git",
+                "reference": "72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f",
+                "reference": "72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2013-02-09 18:37:02",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.12-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ]
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ]
+}
