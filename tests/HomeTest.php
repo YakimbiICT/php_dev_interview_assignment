@@ -6,7 +6,7 @@ use Dan\Yakimbi\Application;
 class HomeTest extends \PHPUnit_Framework_TestCase
 {
     
-    public function testHome()
+    public function testHomeRoutes()
     {
         $app = new Application('/');
         $output = $app->run();
