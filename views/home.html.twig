@@ -11,7 +11,23 @@
     <div class="container well">
         <div class="main row">
             <div class="span12">
-                it's works
+                <table class="table table-bordered">
+                    {% set k=0 %}
+                    {% for i in range(0, 4) %}
+                        <tr>
+                            {% for j in range(0, 3) %}
+                                {% set photo = photos[k] %}
+                                {% set k = k+1 %}
+                                <td width="20%" data-id="{{photo.id}}" class="image">
+                                    <a href="{{photo.pageUrl}}" target="_blank">
+                                        <img src="{{photo.url}}" />
+                                    </a><br/>
+                                    {#{photo.title}#}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
             </div>
         </div>
     </div>

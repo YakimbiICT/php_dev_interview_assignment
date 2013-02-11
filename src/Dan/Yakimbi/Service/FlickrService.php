@@ -25,13 +25,17 @@ class FlickrService {
         
         foreach($photos as $i => $photo) {
             $url = 'http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_m.jpg';
-            $url = strtr($url, array(
+            $photos[$i]->url = strtr($url, array(
                 '{farm-id}' => $photo->farm,
                 '{server-id}' => $photo->server,
                 '{id}' => $photo->id,
                 '{secret}' => $photo->secret,
             ));
-            $photos[$i]->url = $url;
+            $pageUrl = 'http://www.flickr.com/photos/{owner}/{id}/';
+            $photos[$i]->pageUrl = strtr($pageUrl, array(
+                '{owner}' => $photo->owner,
+                '{id}' => $photo->id,
+            ));
         }
         
         return $photos;

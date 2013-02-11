@@ -37,8 +37,10 @@ class Application
         
         $api_key = 'af61ea011bda41aabe9617ba4af884f4';
         $guzzleClient = new GuzzleClient('http://api.flickr.com/services/rest?api_key='.$api_key.'&format=json');
-        $flickrService = new FlickrService($guzzleClient);
         
-        return $twig->render('home.html.twig', array());
+        $flickr = new FlickrService($guzzleClient);
+        $photos = $flickr->getRandomImages(20);
+
+        return $twig->render('home.html.twig', array('photos' => $photos));
     }
 }
