@@ -51,6 +51,7 @@ class Response extends BaseResponse
             $photo->server = '{my-server-id}';
             $photo->id = '{my-id}';
             $photo->secret = '{my-secret}';
+            $photo->owner = '{my-owner}';
             $data->photos->photo[$i] = $photo;
         }
         $data = 'jsonFlickrApi('.json_encode($data).')';

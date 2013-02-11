@@ -7,6 +7,8 @@ use Guzzle\Http\Client as GuzzleClient;
 class Application
 {
     private $route;
+    private $guzzleClient;
+    
     public function __construct($route = null)
     {
         $this->rootDir = __DIR__.'/../../..';
@@ -19,7 +21,6 @@ class Application
             $route = '/';
         }
             
-            
         $this->route = $route;
     }
     
@@ -30,14 +31,33 @@ class Application
         }
     }
     
+    public function setGuzzleClient(GuzzleClient $guzzleClient)
+    {
+        $this->guzzleClient = $guzzleClient;
+    }
+    private function getGuzzleClient()
+    {
+        if ($this->guzzleClient) {
+        
+            return $this->guzzleClient;
+        }
+        $api_key = 'af61ea011bda41aabe9617ba4af884f4';
+        $guzzleClient = new GuzzleClient(
+                'http://api.flickr.com/services/rest?api_key='.$api_key.'&format=json'
+            );
+        
+        return $guzzleClient;
+    }
+    
     public function homeAction()
     {
+        
+        
         $loader = new \Twig_Loader_Filesystem($this->rootDir.'/views/');
         $twig = new \Twig_Environment($loader, array());
         
-        $api_key = 'af61ea011bda41aabe9617ba4af884f4';
-        $guzzleClient = new GuzzleClient('http://api.flickr.com/services/rest?api_key='.$api_key.'&format=json');
         
+        $guzzleClient = $this->getGuzzleClient();
         $flickr = new FlickrService($guzzleClient);
         $photos = $flickr->getRandomImages(20);
 

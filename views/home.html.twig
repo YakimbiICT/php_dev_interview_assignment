@@ -8,6 +8,12 @@
 {% endblock %}
 
 {% block body %}
+    <script type="text/template" id="is-favorite-true">
+        {% include '_is-favorite-true.html.twig' %}
+    </script>
+    <script type="text/template" id="is-favorite-false">
+        {% include '_is-favorite-false.html.twig' %}
+    </script>
     <div class="container well">
         <div class="main row">
             <div class="span12">
@@ -22,6 +28,11 @@
                                     <a href="{{photo.pageUrl}}" target="_blank">
                                         <img src="{{photo.url}}" />
                                     </a><br/>
+                                    {% if photo.is_favorite %}
+                                        {% include '_is-favorite-true.html.twig' %}
+                                    {% else %}
+                                        {% include '_is-favorite-false.html.twig' %}
+                                    {% endif %}
                                     {#{photo.title}#}
                                 </td>
                             {% endfor %}
