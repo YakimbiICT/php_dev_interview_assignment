@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Dan\Yakimbi\Tests\Service;
 use Dan\Yakimbi\Service\FlickrService;
 use Dan\Yakimbi\Test\GuzzleClient;
 
