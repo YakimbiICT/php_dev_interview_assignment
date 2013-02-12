@@ -43,3 +43,60 @@ can design and implement the API however you want. Of course, we'd also like to 
   with it without having to install/configure it. ;-) 
 
 **IF YOU CAN'T USE A PUBLIC REPO ON GITHUB, USE BITCUCKET [[ https://bitbucket.org/ ]] AND SET UP A PRIVATE REPO**
+
+
+# Edward Halls, PHP interview assignment
+
+## Intro/Abstract
+
+When I initially approached this interview task, there was no set deadline. 
+Hence, it was as fast as you can yet at a balanced pace as not to let too much quality suffer
+as to have smooth revisions in the future. As you look through the code you will see 
+where configs have been hardcoded and dynamic solutions/alternatives avoided in order 
+to keep complexity from slowing progress.
+
+
+## Design notes
+
+I decided to go for a simple folder structure which neatly broke out
+the controllers, models, and views. This way it makes it easier to understand
+what files go where and what they should be doing for such a purpose. It also
+easy to plug in Unit tests.
+
+This sets the mind to think of the code in components or like lego pieces 
+and allow libraries/frameworks to be located and accessed easily.
+
+The design of the API is approached with the general concept of Multiple Input/Outputs.
+It is WET as opposed to DRY to break out any API implementation into a seperate code base which simply
+reimplements or mutates the controller in a awkard fashion.The sematics of the input/output data for any controller will be near identical, 
+its fingerprint so to speak. 
+
+Hence to reduce maintenance and lower cost per line you would abstract before and after the contoller/model 
+as the only things that differ would be the format of your input and the desired output format.
+Thus, for example: Unit/Functional tests will only cover one set of MVC entities, where
+the view maintains multiple juxtaposed I/O renderers.
+
+The browser renderer(HTML) is just a different format of data and should 
+be thought of and treated as such. Usually people seem to think of APIs as a seperate
+implementation or "realm". The reality is that HTTP+HTML is its default "API", its Data
+Interchange Format and thus should be coupled to a gateway/abstraction handled at input/output
+to the controllers to make it as DRY as possible.
+
+
+## Development Notes
+
+Its was my intention to build a robust system( goal is from scratch) ASAP.
+With time being the opponent, I stored "extra" complexity in the cooler future improvement.
+
+Issues:
+-Unit/Functional testing needs more work but is a proof of concept through structure 
+and method of how it could be applied to this structure.
+-Error logging/handling is poorly handled, only certain key problems covered. No blanketing.
+-Generally the code does not properly cover all problem cases/concerns as does a more mature
+framework.
+-Keep in mind, it was coded and debugged in 2 days and revised/extended for another 2. 
+ It is not yet awesome but meets the requirements stipulated in a sensible fashion.
+-It could use Form like validation constructs
+
+
+

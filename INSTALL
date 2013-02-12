@@ -1,0 +1,16 @@
+/***************************
+    Installation
+***************************/
+
+1a. Actually decide to set this up or view the example at imact.lagnus.info, the name Imact is for IMgur/IMage ACTions (favorite/delete/add/etc...)
+1b. Install pecl_http by installing pear and then running 'pecl install pecl_http'
+2. Copy everything to your server accesible location
+3. Update Imact/Base.php with your relevant paths and database settings.
+4. Create a database named X or imact, and import the Imact.sql file
+5. Test it out, break it, tell me it broke, then I scru(b/m) it!!
+
+It is hardcoded as I wanted to keep things simple, you can pick up a config file parser from anywhere,
+and then again a php file with the settings, like config.php is equivalent without needing a real parser, eg. PON.
+PHP Object Notation
+
+
