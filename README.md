@@ -43,3 +43,14 @@ can design and implement the API however you want. Of course, we'd also like to 
   with it without having to install/configure it. ;-) 
 
 **IF YOU CAN'T USE A PUBLIC REPO ON GITHUB, USE BITCUCKET [[ https://bitbucket.org/ ]] AND SET UP A PRIVATE REPO**
+
+
+# Edward Halls, PHP interview assignment
+
+## Intro
+Applications can be divided and laid out a multitude of formats and the best way will always depend on the circutstances.
+When I initially approached this interview task, there was no set deadline. Hence, it was a fast as you can
+
+## Development Notes
+
+

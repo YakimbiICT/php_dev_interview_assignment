@@ -1,4 +1,6 @@
 <?php
+require_once "./ext/Fig/SplClassLoader.php";
+require_once "./ext/Imact/Loader.php";
 
-require_once "./Imact/Loader.php";
-$app = new Imact_App();
+Imact\Loader::init();
+$app = new Imact\App();
