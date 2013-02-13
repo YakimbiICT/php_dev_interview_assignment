@@ -1,4 +1,12 @@
-<a href="#" data-action="setFavorite" class="is-favorite-true" >
-    <i class="icon-star"></i>
-    Delete
-</a>
+<div data-action="setIsFavorite" >
+    <a href="#" class="is-favorite-true" >
+        <i class="icon-star"></i>
+        Remove from Favorites
+    </a><br/>
+    {% if photo.description %}
+        {% include '_description-true.html.twig' with {description: photo.description} %}
+    {% else %}
+        {% include '_description-false.html.twig' with {description: photo.description} %}
+    {% endif %}
+        
+</div>

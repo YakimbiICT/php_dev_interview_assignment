@@ -30,7 +30,7 @@ class Application
         }
         
         if (preg_match('/^\/image\/(?P<id>\w+)[\/]?$/',$this->route, $matches)) {
-            return $this->imgageAction($matches['id']);
+            return $this->imageAction($matches['id']);
         }
         
         return $this->notFoundAction();
@@ -78,7 +78,10 @@ class Application
             
             $image = $imageMan->find($id);
             try {
-                $image->bind($_POST);
+                $image->bind(json_decode(file_get_contents("php://input")));
+                $imageMan->save($image);
+                
+                return json_encode($image->toArray());
             } catch (\Exception $e) {
                 header('HTTP/1.0 400 Bad Request');
             }

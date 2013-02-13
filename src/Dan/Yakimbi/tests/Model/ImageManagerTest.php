@@ -34,6 +34,14 @@ class ImageManaterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($image->isFavorite());
         $this->assertNull($image->getDescription());
         
+        $image->bind(array('isFavorite' => false, 'description' => '[description]'));
+        
+        $this->assertInstanceOf('\Dan\Yakimbi\Model\Image', $image);
+        $this->assertEquals('[id]', $image->getId());
+        $this->assertEquals('[url]', $image->getUrl());
+        $this->assertFalse($image->isFavorite());
+        $this->assertEquals('[description]', $image->getDescription());
+        
         $imageMan->remove($image);
         
         $image = $imageMan->find('[id]');

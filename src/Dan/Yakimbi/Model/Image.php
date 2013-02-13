@@ -11,18 +11,29 @@ class Image
     
     public function __construct($data=null) {
         if ($data) {
-            if (isset($data['id'])) {
-                $this->setId($data['id']);
-            }
-            if (isset($data['isFavorite'])) {
-                $this->setIsFavorite($data['isFavorite']);
-            }
-            if (isset($data['url'])) {
-                $this->setUrl($data['url']);
-            }
-            if (isset($data['description'])) {
-                $this->setDescription($data['description']);
-            }
+            $this->bind($data);
+        }
+    }
+    
+    public function bind($data) {
+
+        if ($data instanceof \stdClass ) {
+            $data = (array)$data;
+        }
+        if (!is_array($data)) {
+            throw new \Exception('$data must be an array');
+        }
+        if (isset($data['id'])) {
+            $this->setId($data['id']);
+        }
+        if (isset($data['isFavorite'])) {
+            $this->setIsFavorite($data['isFavorite']);
+        }
+        if (isset($data['url'])) {
+            $this->setUrl($data['url']);
+        }
+        if (isset($data['description'])) {
+            $this->setDescription($data['description']);
         }
     }
     
