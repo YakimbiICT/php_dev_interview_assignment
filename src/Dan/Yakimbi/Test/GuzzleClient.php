@@ -31,6 +31,11 @@ class Request extends BaseRequest
         return new Response();
     }
     
+    public function getParams()
+    {
+        return new Params();
+    }
+    
 }
 
 class Response extends BaseResponse
@@ -58,4 +63,11 @@ class Response extends BaseResponse
         return $data;
     }
     
+}
+
+class Params
+{
+    public function set($key, $value) {
+        
+    }
 }
