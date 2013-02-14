@@ -7,6 +7,7 @@ class Image
     private $id;
     private $isFavorite;
     private $url;
+    private $pageUrl;
     private $description;
     
     public function __construct($data=null) {
@@ -31,6 +32,9 @@ class Image
         }
         if (isset($data['url'])) {
             $this->setUrl($data['url']);
+        }
+        if (isset($data['pageUrl'])) {
+            $this->setPageUrl($data['pageUrl']);
         }
         if (isset($data['description'])) {
             $this->setDescription($data['description']);
@@ -67,6 +71,16 @@ class Image
         return $this->url;
     }
     
+    public function setPageUrl($url)
+    {
+        $this->pageUrl = trim($url);
+    }
+    
+    public function getPageUrl()
+    {
+        return $this->pageUrl;
+    }
+    
     public function setDescription($description)
     {
         $this->description = $description;
@@ -83,6 +97,7 @@ class Image
           'id' => $this->getId(),
           'isFavorite' => $this->isFavorite(),
           'url' => $this->getUrl(),
+          'pageUrl' => $this->getPageUrl(),
           'description' => $this->getDescription(),
         );
     }

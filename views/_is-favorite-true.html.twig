@@ -3,10 +3,10 @@
         <i class="icon-star"></i>
         Remove from Favorites
     </a><br/>
-    {% if photo.description %}
-        {% include '_description-true.html.twig' with {description: photo.description} %}
+    {% if image.description %}
+        {% include '_description-true.html.twig' with {description: image.description} %}
     {% else %}
-        {% include '_description-false.html.twig' with {description: photo.description} %}
+        {% include '_description-false.html.twig' with {description: image.description} %}
     {% endif %}
         
 </div>
