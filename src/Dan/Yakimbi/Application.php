@@ -29,7 +29,15 @@ class Application
             return $this->homeAction();
         }
         
-        if (preg_match('/^\/image\/(?P<id>\w+)[\/]?$/',$this->route, $matches)) {
+        if (preg_match('/^\/random_images[\/]?$/',$this->route)) {
+            return $this->randomImagesAction();
+        }
+        
+        if (preg_match('/^\/images[\/]?$/',$this->route)) {
+            return $this->imagesAction();
+        }
+        
+        if (preg_match('/^\/images\/(?P<id>\w+)[\/]?$/',$this->route, $matches)) {
             return $this->imageAction($matches['id']);
         }
 
@@ -76,9 +84,20 @@ class Application
         ));
     }
     
-    public function imageAction($id)
+    public function randomImagesAction()
     {
-        if($_SERVER['REQUEST_METHOD']=='POST') {
+        if ($_SERVER['REQUEST_METHOD']=='GET') {
+            $guzzleClient = $this->getGuzzleClient();
+            $flickr = new Service\FlickrService($guzzleClient);
+            $images = $flickr->getRandomImages(20);
+            
+            return json_encode($images);
+        }
+    }
+
+    public function imageAction($id=null)
+    {
+        if ($_SERVER['REQUEST_METHOD']=='POST') {
             $imageMan = new Model\ImageManager();
             $store = new Model\Store('/data', 'images.yml', 'id');
             $imageMan->setStore($store);
@@ -110,6 +129,21 @@ class Application
             'route' => 'favorites',
             'images' => $images
         ));
+    }
+    
+    public function imagesAction()
+    {
+        $imageMan = new Model\ImageManager();
+        $store = new Model\Store('/data', 'images.yml', 'id');
+        $imageMan->setStore($store);
+
+        $images = $imageMan->getAll();
+        
+        foreach($images as $i => $image) {
+            $images[$i] = $image->toArray();
+        }
+        
+        return json_encode($images);        
     }
     
     public function notFoundAction() {

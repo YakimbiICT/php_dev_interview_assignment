@@ -28,7 +28,7 @@
             var pageUrl = image.find('a').attr('href');
             var data = JSON.stringify({id: id, isFavorite: isFavorite, url: url, pageUrl: pageUrl});
             $.ajax({
-                url: '/image/'+id,
+                url: '/images/'+id,
                 data: data,
                 dataType: 'text',
                 type: 'POST',
@@ -69,7 +69,7 @@
             var description = image.find('input.description').val();
             var data = JSON.stringify({id: id, description: description});
             $.ajax({
-                url: '/image/'+id,
+                url: '/images/'+id,
                 data: data,
                 dataType: 'text',
                 type: 'POST',
@@ -104,7 +104,7 @@
             var id = image.attr('data-id');
             var data = JSON.stringify({id: id, description: ''});
             $.ajax({
-                url: '/image/'+id,
+                url: '/images/'+id,
                 data: data,
                 dataType: 'text',
                 type: 'POST',
