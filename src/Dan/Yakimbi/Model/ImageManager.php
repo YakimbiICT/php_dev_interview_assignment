@@ -36,7 +36,12 @@ class ImageManager
     
     public function save(Image $image) {
         
-        $this->store->setEntityData($image->toArray());
+        if ($image->isFavorite()) {
+            $this->store->setEntityData($image->toArray());
+        } else {
+            $this->remove($image);
+        }
+            
     }
     
     public function remove(Image $image) {

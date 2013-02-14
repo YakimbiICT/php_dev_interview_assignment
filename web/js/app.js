@@ -10,7 +10,8 @@
             "click .description-false":    "insertDescription",
             "focusout input.description":  "saveDescription",
             "keypress input.description":  "saveDescription",
-            "click .description-true":     "editDescription"
+            "click .description-true":     "editDescription",
+            "click .description-remove":   "removeDescription"
         },
         setIsFavoriteTrue: function (el) {
             this.setIsFavorite(el, true);
@@ -52,7 +53,10 @@
             var image = $(el.srcElement).parents('.image[data-id]');
             var id = image.attr('data-id');
             var div = image.find('div[data-action="setDescription"]');
-            div.replaceWith(_.template($("#description-edit").html(),{description: ''}));  
+            div.replaceWith(_.template($("#description-edit").html(),{description: ''}));
+            image.find('input[name="description"]').focus();
+            
+            
             return false;
         },
         saveDescription: function (el) {
@@ -92,6 +96,33 @@
             var div = image.find('div[data-action="setDescription"]');
             var description = $.trim(div.find('a.description-true').text());
             div.replaceWith(_.template($("#description-edit").html(),{description: description}));  
+            return false;
+        },
+        removeDescription: function (el) {
+            var image = $(el.srcElement).parents('.image[data-id]');
+            var id = image.attr('data-id');
+            var data = JSON.stringify({id: id, description: ''});
+            $.ajax({
+                url: '?r=/image/'+id,
+                data: data,
+                dataType: 'text',
+                type: 'POST',
+                error: function(data) {
+                    $['.flash-msg']
+                        .addClass('error')
+                        .html('Communication errors. Please retry later');
+                },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    var image = $('[data-id="'+data.id+'"]');
+                    var div = image.find('div[data-action="setDescription"]');
+                    if (data.description) {
+                        div.replaceWith(_.template($("#description-true").html(),{description: description}));                    
+                    } else {
+                        div.replaceWith(_.template($("#description-false").html(),{}));                    
+                    } 
+                }
+            });
             return false;
         },
         
