@@ -32,6 +32,10 @@ class Application
         if (preg_match('/^\/image\/(?P<id>\w+)[\/]?$/',$this->route, $matches)) {
             return $this->imageAction($matches['id']);
         }
+
+        if (preg_match('/^\/favorites[\/]?$/',$this->route, $matches)) {
+            return $this->favoritesAction();
+        }
         
         return $this->notFoundAction();
     }
@@ -64,9 +68,9 @@ class Application
         
         $guzzleClient = $this->getGuzzleClient();
         $flickr = new Service\FlickrService($guzzleClient);
-        $photos = $flickr->getRandomImages(20);
+        $images = $flickr->getRandomImages(20);
 
-        return $twig->render('home.html.twig', array('photos' => $photos));
+        return $twig->render('home.html.twig', array('images' => $images));
     }
     
     public function imageAction($id)
@@ -86,6 +90,20 @@ class Application
                 header('HTTP/1.0 400 Bad Request');
             }
         }
+    }
+
+    public function favoritesAction()
+    {
+        $imageMan = new Model\ImageManager();
+        $store = new Model\Store('/data', 'images.yml', 'id');
+        $imageMan->setStore($store);
+
+        $images = $imageMan->getAll();
+        
+        $loader = new \Twig_Loader_Filesystem($this->rootDir.'/views/');
+        $twig = new \Twig_Environment($loader, array());
+
+        return $twig->render('favorites.html.twig', array('images' => $images));
     }
     
     public function notFoundAction() {
