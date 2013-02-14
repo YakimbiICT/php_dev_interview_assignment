@@ -26,6 +26,7 @@ class Application
     public function run()
     {
         if ($this->route=='/') {
+            echo $this->route;
             return $this->homeAction();
         }
         
