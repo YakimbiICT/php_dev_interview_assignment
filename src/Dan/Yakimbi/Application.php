@@ -70,7 +70,10 @@ class Application
         $flickr = new Service\FlickrService($guzzleClient);
         $images = $flickr->getRandomImages(20);
 
-        return $twig->render('home.html.twig', array('images' => $images));
+        return $twig->render('home.html.twig', array(
+            'route' => 'home',
+            'images' => $images
+        ));
     }
     
     public function imageAction($id)
@@ -103,7 +106,10 @@ class Application
         $loader = new \Twig_Loader_Filesystem($this->rootDir.'/views/');
         $twig = new \Twig_Environment($loader, array());
 
-        return $twig->render('favorites.html.twig', array('images' => $images));
+        return $twig->render('favorites.html.twig', array(
+            'route' => 'favorites',
+            'images' => $images
+        ));
     }
     
     public function notFoundAction() {

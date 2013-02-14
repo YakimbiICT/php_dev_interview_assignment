@@ -14,12 +14,11 @@
                                 <a href="{{image.pageUrl}}" target="_blank">
                                     <img src="{{image.url}}" />
                                 </a><br/>
-                                {% if image.is_favorite %}
+                                {% if image.isFavorite %}
                                     {% include '_is-favorite-true.html.twig' %}
                                 {% else %}
                                     {% include '_is-favorite-false.html.twig' %}
                                 {% endif %}
-                                {#{image.title}#}
                             </td>
                         {% else %}
                             <td width="20%"></td>

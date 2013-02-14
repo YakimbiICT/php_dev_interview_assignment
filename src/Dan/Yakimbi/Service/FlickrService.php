@@ -3,12 +3,23 @@ namespace Dan\Yakimbi\Service;
 
 use Guzzle\Http\Client as GuzzleClient;
 
+use Doctrine\Common\Cache\ApcCache;
+use Guzzle\Cache\DoctrineCacheAdapter;
+use Guzzle\Cache\NullCacheAdapter;
+use Guzzle\Plugin\Cache\CachePlugin;
+
 class FlickrService {
     
     private $guzzleClient;
     
     public function __construct(GuzzleClient $guzzleClient) {
         $this->guzzleClient = $guzzleClient;
+        
+        $adapter = new DoctrineCacheAdapter(new ApcCache());
+//        $adapter = new NullCacheAdapter();
+        $cache = new CachePlugin($adapter, true);
+
+        $this->guzzleClient->addSubscriber($cache);
     }
     
     public function getRandomImages($num=20)
@@ -44,6 +55,7 @@ class FlickrService {
     private function sendRequest($parameters)
     {
         $request = $this->guzzleClient->get('?'. http_build_query($parameters));
+        $request->getParams()->set('cache.override_ttl', 300);
         $response = $request->send();
         $body = $response->getBody();
         $body = preg_replace('/^jsonFlickrApi\(/','', $body);

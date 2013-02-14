@@ -1,6 +1,8 @@
+{% macro active(route, current) %}{% if route==current %}active{% endif %}{% endmacro %}
+
 <div class="nav">
     <ul class="nav nav-tabs unstyled inline">
-        <li><a href="?r=/"><i class="icon-home" ></i>Home</a></li>
-        <li><a href="?r=/favorites"><i class="icon-star" ></i>Favorites</a></li>
+        <li class="{{_self.active('home', route)}}" ><a href="?r=/"><i class="icon-home" ></i>Home</a></li>
+        <li class="{{_self.active('favorites', route)}}" ><a href="?r=/favorites" ><i class="icon-star" ></i>Favorites</a></li>
     </ul>
 </div>
