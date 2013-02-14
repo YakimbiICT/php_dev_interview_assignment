@@ -56,7 +56,7 @@ class Store
             $data = Yaml::parse(file_get_contents($dataFile));
         }
         
-        if (!$data) {
+        if (!isset($data) || !$data) {
             $data = array();
         }
         
