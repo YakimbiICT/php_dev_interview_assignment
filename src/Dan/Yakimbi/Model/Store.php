@@ -54,7 +54,9 @@ class Store
         $dataFile = $this->getAbsFilename();
         if (file_exists($dataFile)) {
             $data = Yaml::parse(file_get_contents($dataFile));
-        } else {
+        }
+        
+        if (!$data) {
             $data = array();
         }
         

@@ -1,29 +1,33 @@
-<table class="table table-bordered">
-    {% set k = 0 %}
-    {% set n = images|length // 4 %}
-    {% if  (images|length % 4) == 0 %} {% set n = n - 1 %} {% endif %}
-    {{images|length}} / {{n}}
-    {% for i in range(0, n) %}
-        <tr>
-            {% for j in range(0, 3) %}
-                {% set image = images[k] %}
-                {% set k = k+1 %}
-                {% if image %}
-                    <td width="20%" data-id="{{image.id}}" class="image">
-                        <a href="{{image.pageUrl}}" target="_blank">
-                            <img src="{{image.url}}" />
-                        </a><br/>
-                        {% if image.is_favorite %}
-                            {% include '_is-favorite-true.html.twig' %}
+{% if images|length > 0 %}
+    <table class="table table-bordered">
+            {% set k = 0 %}
+            {% set n = images|length // 4 %}
+            {% if  (images|length % 4) == 0 and n>0 %} {% set n = n - 1 %} {% endif %}
+
+            {% for i in range(0, n) %}
+                <tr>
+                    {% for j in range(0, 3) %}
+                        {% set image = images[k] %}
+                        {% set k = k+1 %}
+                        {% if image %}
+                            <td width="20%" data-id="{{image.id}}" class="image">
+                                <a href="{{image.pageUrl}}" target="_blank">
+                                    <img src="{{image.url}}" />
+                                </a><br/>
+                                {% if image.is_favorite %}
+                                    {% include '_is-favorite-true.html.twig' %}
+                                {% else %}
+                                    {% include '_is-favorite-false.html.twig' %}
+                                {% endif %}
+                                {#{image.title}#}
+                            </td>
                         {% else %}
-                            {% include '_is-favorite-false.html.twig' %}
+                            <td width="20%"></td>
                         {% endif %}
-                        {#{image.title}#}
-                    </td>
-                {% else %}
-                    <td width="20%"></td>
-                {% endif %}
+                    {% endfor %}
+                </tr>
             {% endfor %}
-        </tr>
-    {% endfor %}
-</table>
+    </table>
+{% else %}
+    <strong>No favorites!</strong>
+{% endif %}
