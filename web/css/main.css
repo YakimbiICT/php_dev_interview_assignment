@@ -1,0 +1,18 @@
+body {
+    padding-top: 20px;
+}
+
+.image img {
+    width: 100%;
+}
+
+.image input.description {
+    width: 92%;
+}
+
+div.nav {
+    font-weight: bold;
+}
+div.nav li i {
+    margin-right: 5px;
+}

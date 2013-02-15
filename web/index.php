@@ -5,5 +5,5 @@ ini_set('display_startup_errors', 1);
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$main = new Dan\Yakimbi\Main();
-$main->run();
+$app = new Dan\Yakimbi\Application($_SERVER['REDIRECT_URL']);
+echo $app->run();

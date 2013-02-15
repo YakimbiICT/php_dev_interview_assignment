@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="yakimbi" default="build" basedir=".">
+
+    <target name="install" >
+        <phingcall target="chmod" />
+        <phingcall target="vendors" />
+    </target>
+    
+    <target name="chmod">
+        <exec command="chmod -R 777 data" />
+        <exec command="chmod -R 777 cache" />
+        <exec command="setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx data cache" />
+        <exec command="setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx data cache" />
+    </target>
+    
+    <target name="vendors">
+        <exec command="./composer.phar install" outputProperty="return" /> 
+    </target>
+    
+</project>
