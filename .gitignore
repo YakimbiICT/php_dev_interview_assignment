@@ -1,6 +1,7 @@
 nbproject/*
 vendor/*
 data/*
+cache/*
 
 !.gitkeep
 

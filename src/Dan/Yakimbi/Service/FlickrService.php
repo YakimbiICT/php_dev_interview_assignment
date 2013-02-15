@@ -3,7 +3,7 @@ namespace Dan\Yakimbi\Service;
 
 use Guzzle\Http\Client as GuzzleClient;
 
-use Doctrine\Common\Cache\ApcCache;
+use Doctrine\Common\Cache\FilesystemCache;
 use Guzzle\Cache\DoctrineCacheAdapter;
 use Guzzle\Cache\NullCacheAdapter;
 use Guzzle\Plugin\Cache\CachePlugin;
@@ -15,7 +15,7 @@ class FlickrService {
     public function __construct(GuzzleClient $guzzleClient) {
         $this->guzzleClient = $guzzleClient;
         
-        $adapter = new DoctrineCacheAdapter(new ApcCache());
+        $adapter = new DoctrineCacheAdapter(new FilesystemCache(__DIR__.'/../../../../cache'));
 //        $adapter = new NullCacheAdapter();
         $cache = new CachePlugin($adapter, true);
 
