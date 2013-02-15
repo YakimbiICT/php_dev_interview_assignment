@@ -48,10 +48,13 @@ can design and implement the API however you want. Of course, we'd also like to 
 
 # Implementation
 
+## Demo
+You can see the application in action at [[ http://yakimbi.danilosanchi.net ]]
+
 ## System Requirment
 
 ### CURL
-Guzzle HTTP client works need CURL
+_Guzzle HTTP client_ need CURL
 ```shell
 $ sudo apt-get install php5-curl
 $ sudo service apache2 restart
@@ -120,6 +123,3 @@ cd php_dev_interview_assignment
 phing install
 ```
 
-## Demo
-
-You can see the application in action at [[ http://yakimbi.danilosanchi.net ]]
