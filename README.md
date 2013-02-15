@@ -50,26 +50,20 @@ can design and implement the API however you want. Of course, we'd also like to 
 
 ## System Requirment
 
-### PEAR
-To install PHPUnit and PHING you can install PEAR
-```shell
-$ sudo apt-get install php-pear
-$ pear config-set auto_discover 1
-```
-
-### PHPUnit
-```shell
-$ sudo pear channel-discover pear.phpunit.de
-$ pear install --alldeps phpunit/PHPUnit
-```
-
 ### CURL
+Guzzle HTTP client works need CURL
 ```shell
 $ sudo apt-get install php5-curl
 $ sudo service apache2 restart
 ```
 
-### PHING
+### PEAR and PHING
+To install PHING you can install PEAR
+```shell
+$ sudo apt-get install php-pear
+$ pear config-set auto_discover 1
+```
+
 To enable the installation script you need PHING.
 You can otherwise to read *build.xml* and to execute the command lines inside it
 
@@ -79,9 +73,7 @@ $ pear install phing/phing
 ```
 
 ## Virtual Host Setting
-```shell
-$ sudo gedit /etc/apache2/sites-available/yakimbi
-```
+Create the file _/etc/apache2/sites-available/yakimbi_
 ```text
 # /etc/apache2/sites-available/yakimbi
 
@@ -100,27 +92,34 @@ $ sudo gedit /etc/apache2/sites-available/yakimbi
     CustomLog ${APACHE_LOG_DIR}/yakimbi.access.log combined
 </VirtualHost>
 ```
-
+Enable the new virtual host
 ```shell
 $ sudo a2ensite yakimbi
-$ sudo gedit /etc/hosts
 ```
+Edit the file _/etc/hosts_
 ```text
 # /etc/hosts
 
-127.0.0.1 yakimbi yakimbi.local.com
+...
+127.0.0.1 yakimbi
+...
 ```
+
+Restart Apache
 ```shell
 $ sudo a2enmod rewrite
 $ sudo service apache2 restart
 ```
 
-
 ## Installation
-
+Clone this repo and run _phing install_
 ```shell
 cd /var/www/
 git clone git@github.com:danielsan80/php_dev_interview_assignment.git
 cd php_dev_interview_assignment
 phing install
 ```
+
+## Demo
+
+You can see the application in action at [[ http://yakimbi.danilosanchi.net ]]
