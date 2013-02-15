@@ -2,56 +2,17 @@
 namespace Dan\Yakimbi;
 
 use Guzzle\Http\Client as GuzzleClient;
+use Symfony\Component\HttpFoundation\Response;
 
-class Application
+class Application extends BaseApplication
 {
-    private $route;
     private $guzzleClient;
-    
-    public function __construct($route = null)
-    {
-        $this->rootDir = __DIR__.'/../../..';
-        $this->setRoute($route);
-    }
-    
-    public function setRoute($route)
-    {
-        if ($route == '' || is_null($route)) {
-            $route = '/';
-        }
-            
-        $this->route = $route;
-    }
-    
-    public function run()
-    {
-        if ($this->route=='/') {
-            return $this->homeAction();
-        }
-        
-        if (preg_match('/^\/random_images[\/]?$/',$this->route)) {
-            return $this->randomImagesAction();
-        }
-        
-        if (preg_match('/^\/images[\/]?$/',$this->route)) {
-            return $this->imagesAction();
-        }
-        
-        if (preg_match('/^\/images\/(?P<id>\w+)[\/]?$/',$this->route, $matches)) {
-            return $this->imageAction($matches['id']);
-        }
-
-        if (preg_match('/^\/favorites[\/]?$/',$this->route, $matches)) {
-            return $this->favoritesAction();
-        }
-        
-        return $this->notFoundAction();
-    }
     
     public function setGuzzleClient(GuzzleClient $guzzleClient)
     {
         $this->guzzleClient = $guzzleClient;
     }
+    
     private function getGuzzleClient()
     {
         if ($this->guzzleClient) {
@@ -66,73 +27,117 @@ class Application
         return $guzzleClient;
     }
     
+    protected function getResponse()
+    {
+        $request = $this->getRequest();
+        $route = $request->getRequestUri();
+        
+        if ($route=='/') {
+            return $this->homeAction();
+        }
+        
+        if (preg_match('/^\/favorites[\/]?$/',$route, $matches)) {
+            return $this->favoritesAction();
+        }
+        
+        if (preg_match('/^\/api\/v1\/random_images[\/]?$/',$route)) {
+            return $this->apiRandomImagesAction();
+        }
+        
+        if (preg_match('/^\/api\/v1\/favorites[\/]?$/',$route)) {
+            return $this->apiFavoritesAction();
+        }
+        
+        if (preg_match('/^\/api\/v1\/favorites\/(?P<id>\w+)[\/]?$/',$route, $matches)) {
+            return $this->apiFavoriteAction($matches['id']);
+        }
+        
+        return $this->notFoundAction();
+    }
+    
     public function homeAction()
     {
+        $request = $this->getRequest();
         
-        
-        $loader = new \Twig_Loader_Filesystem($this->rootDir.'/views/');
-        $twig = new \Twig_Environment($loader, array());
-        
+        if ($request->getMethod() != 'GET') {
+            return new Response('Method not allowed', 405);
+        }
         
         $guzzleClient = $this->getGuzzleClient();
         $flickr = new Service\FlickrService($guzzleClient);
         $images = $flickr->getRandomImages(20);
 
-        return $twig->render('home.html.twig', array(
+        return $this->render('home.html.twig', array(
             'route' => 'home',
             'images' => $images
         ));
     }
     
-    public function randomImagesAction()
-    {
-        if ($_SERVER['REQUEST_METHOD']=='GET') {
-            $guzzleClient = $this->getGuzzleClient();
-            $flickr = new Service\FlickrService($guzzleClient);
-            $images = $flickr->getRandomImages(20);
-            
-            return json_encode($images);
-        }
-    }
-
-    public function imageAction($id=null)
-    {
-        if ($_SERVER['REQUEST_METHOD']=='POST') {
-            $imageMan = new Model\ImageManager();
-            $store = new Model\Store('/data', 'images.yml', 'id');
-            $imageMan->setStore($store);
-            
-            $image = $imageMan->find($id);
-            try {
-                $image->bind(json_decode(file_get_contents("php://input")));
-                $imageMan->save($image);
-                
-                return json_encode($image->toArray());
-            } catch (\Exception $e) {
-                header('HTTP/1.0 400 Bad Request');
-            }
-        }
-    }
-
     public function favoritesAction()
     {
+        $request = $this->getRequest();
+        
+        if ($request->getMethod() != 'GET') {
+            return new Response('Method not allowed', 405);
+        }
+        
         $imageMan = new Model\ImageManager();
         $store = new Model\Store('/data', 'images.yml', 'id');
         $imageMan->setStore($store);
 
         $images = $imageMan->getAll();
         
-        $loader = new \Twig_Loader_Filesystem($this->rootDir.'/views/');
-        $twig = new \Twig_Environment($loader, array());
-
-        return $twig->render('favorites.html.twig', array(
+        return $this->render('favorites.html.twig', array(
             'route' => 'favorites',
             'images' => $images
         ));
     }
     
-    public function imagesAction()
+    public function apiRandomImagesAction()
     {
+        $request = $this->getRequest();
+        
+        if ($request->getMethod() != 'GET') {
+            return new Response('Method not allowed', 405);
+        }
+        $guzzleClient = $this->getGuzzleClient();
+        $flickr = new Service\FlickrService($guzzleClient);
+        $images = $flickr->getRandomImages(20);
+
+        return new Response(json_encode($images));
+        
+    }
+
+    public function apiFavoriteAction($id=null)
+    {
+        $request = $this->getRequest();
+        
+        if ($request->getMethod() != 'POST') {
+            return new Response('Method not allowed', 405);
+        }
+        $imageMan = new Model\ImageManager();
+        $store = new Model\Store('/data', 'images.yml', 'id');
+        $imageMan->setStore($store);
+
+        $image = $imageMan->find($id);
+        try {
+            $image->bind(json_decode(file_get_contents("php://input")));
+            $imageMan->save($image);
+
+            return new Response(json_encode($image->toArray()));
+        } catch (\Exception $e) {
+            return new Response('Bad request', 400);
+        }
+    }
+
+    
+    
+    public function apiImagesAction()
+    {
+        if ($request->getMethod() != 'GET') {
+            return new Response('Method not allowed', 405);
+        }
+
         $imageMan = new Model\ImageManager();
         $store = new Model\Store('/data', 'images.yml', 'id');
         $imageMan->setStore($store);
@@ -143,11 +148,6 @@ class Application
             $images[$i] = $image->toArray();
         }
         
-        return json_encode($images);        
-    }
-    
-    public function notFoundAction() {
-        header('HTTP/1.0 404 Not Found');
-        return 'Not Found';
+        return new Response(json_encode($images));
     }
 }

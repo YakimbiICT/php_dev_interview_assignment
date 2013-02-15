@@ -10,7 +10,8 @@
         "guzzle/guzzle": "~3.1",
         "twig/twig": ">=1.8,<2.0-dev",
         "symfony/yaml": "2.1.*",
-        "doctrine/common": "2.3.0"
+        "doctrine/common": "2.3.0",
+        "symfony/http-foundation":"2.3.*"
     },
     "minimum-stability": "dev",
     "autoload": {
