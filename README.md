@@ -43,3 +43,84 @@ can design and implement the API however you want. Of course, we'd also like to 
   with it without having to install/configure it. ;-) 
 
 **IF YOU CAN'T USE A PUBLIC REPO ON GITHUB, USE BITCUCKET [[ https://bitbucket.org/ ]] AND SET UP A PRIVATE REPO**
+
+---
+
+# Implementation
+
+## System Requirment
+
+### PEAR
+To install PHPUnit and PHING you can install PEAR
+```shell
+$ sudo apt-get install php-pear
+$ pear config-set auto_discover 1
+```
+
+### PHPUnit
+```shell
+$ sudo pear channel-discover pear.phpunit.de
+$ pear install --alldeps phpunit/PHPUnit
+```
+
+### CURL
+```shell
+$ sudo apt-get install php5-curl
+$ sudo service apache2 restart
+```
+
+### PHING
+To enable the installation script you need PHING.
+You can otherwise to read *build.xml* and to execute the command lines inside it
+
+```shell
+$ sudo pear channel-discover pear.phing.info
+$ pear install phing/phing
+```
+
+## Virtual Host Setting
+```shell
+$ sudo gedit /etc/apache2/sites-available/yakimbi
+```
+```text
+# /etc/apache2/sites-available/yakimbi
+
+<VirtualHost *:80>
+    ServerAdmin danilo.sanchi@gmail.com
+    ServerName yakimbi
+    DocumentRoot /var/www/php_dev_interview_assignment/web
+    DirectoryIndex index.php index.html
+    <Directory /var/www/php_dev_interview_assignment/web>
+            AllowOverride all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/yakimbi.error.log
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel notice
+    CustomLog ${APACHE_LOG_DIR}/yakimbi.access.log combined
+</VirtualHost>
+```
+
+```shell
+$ sudo a2ensite yakimbi
+$ sudo gedit /etc/hosts
+```
+```text
+# /etc/hosts
+
+127.0.0.1 yakimbi yakimbi.local.com
+```
+```shell
+$ sudo a2enmod rewrite
+$ sudo service apache2 restart
+```
+
+
+## Installation
+
+```shell
+cd /var/www/
+git clone git@github.com:danielsan80/php_dev_interview_assignment.git
+cd php_dev_interview_assignment
+phing install
+```
