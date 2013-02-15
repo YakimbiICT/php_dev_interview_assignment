@@ -3,3 +3,9 @@ vendor/*
 data/*
 
 !.gitkeep
+
+
+# Capistrano
+.rsync_cache
+ssh-connect
+REVISION
