@@ -5,7 +5,7 @@ namespace Dan\Yakimbi\Model;
 class Image
 {
     private $id;
-    private $isFavorite;
+    private $isFavorite = true;
     private $url;
     private $link;
     private $description;

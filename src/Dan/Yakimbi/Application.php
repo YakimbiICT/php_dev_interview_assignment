@@ -123,24 +123,40 @@ class Application extends BaseApplication
     {
         $request = $this->getRequest();
         
-        if ($request->getMethod() != 'POST') {
-            return new Response('Method not allowed', 405);
-        }
-        $imageMan = new Model\ImageManager();
-        $store = new Model\Store('/data', 'images.yml', 'id');
-        $imageMan->setStore($store);
+        if ($request->getMethod() == 'PUT') {
+            $imageMan = new Model\ImageManager();
+            $store = new Model\Store('/data', 'images.yml', 'id');
+            $imageMan->setStore($store);
 
-        $image = $imageMan->find($id);
-        try {
-            $image->bind(json_decode(file_get_contents("php://input")));
-            $imageMan->save($image);
+            $image = $imageMan->find($id);
+            try {
+                $image->bind(json_decode($request->getContent()));
+                $imageMan->save($image);
 
-            return new Response(json_encode($image->toArray()));
-        } catch (\Exception $e) {
-            return new Response('Bad request', 400);
+                return new Response(json_encode($image->toArray()));
+            } catch (\Exception $e) {
+                return new Response('Bad request', 400);
+            }
         }
+        
+        if ($request->getMethod() == 'DELETE') {
+            $imageMan = new Model\ImageManager();
+            $store = new Model\Store('/data', 'images.yml', 'id');
+            $imageMan->setStore($store);
+
+            $image = $imageMan->find($id);
+            try {
+                $imageMan->remove($image);
+
+                return new Response(json_encode($image->toArray()));
+            } catch (\Exception $e) {
+                
+                return new Response('Bad request', 400);
+            }
+        }
+        
+        return new Response('Method not allowed', 405);
     }
-
     
     
     public function apiFavoritesAction()

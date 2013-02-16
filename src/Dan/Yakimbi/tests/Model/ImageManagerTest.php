@@ -19,7 +19,7 @@ class ImageManaterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Dan\Yakimbi\Model\Image', $image);
         $this->assertEquals('[id]', $image->getId());
         $this->assertNull($image->getUrl());
-        $this->assertNull($image->isFavorite());
+        $this->assertTrue($image->isFavorite());
         $this->assertNull($image->getDescription());
         
         $image->setUrl('[url]');
@@ -49,7 +49,7 @@ class ImageManaterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Dan\Yakimbi\Model\Image', $image);
         $this->assertEquals('[id]', $image->getId());
         $this->assertNull($image->getUrl());
-        $this->assertNull($image->isFavorite());
+        $this->assertTrue($image->isFavorite());
         $this->assertNull($image->getDescription());
     }
 

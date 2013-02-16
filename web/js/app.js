@@ -14,24 +14,16 @@
             "click .description-remove":   "removeDescription"
         },
         setIsFavoriteTrue: function (el) {
-            this.setIsFavorite(el, true);
-            return false;
-        },
-        setIsFavoriteFalse: function (el) {
-            this.setIsFavorite(el, false);
-            return false;
-        },
-        setIsFavorite: function (el, isFavorite) {
             var image = $(el.srcElement).parents('.image[data-id]');
             var id = image.attr('data-id');
             var url = image.find('img').attr('src');
             var link = image.find('a').attr('href');
-            var data = JSON.stringify({id: id, isFavorite: isFavorite, url: url, link: link});
+            var data = JSON.stringify({id: id, url: url, link: link});
             $.ajax({
                 url: '/api/v1/favorites/'+id,
                 data: data,
                 dataType: 'text',
-                type: 'POST',
+                type: 'PUT',
                 error: function(data) {
                     $['.flash-msg']
                         .addClass('error')
@@ -41,11 +33,27 @@
                     data = JSON.parse(data);
                     var image = $('[data-id="'+data.id+'"]');
                     var a = image.find('div[data-action="setIsFavorite"]');
-                    if (data.isFavorite) {
-                        a.replaceWith(_.template($("#is-favorite-true").html(),{}));                    
-                    } else {
-                        a.replaceWith(_.template($("#is-favorite-false").html(),{}));                    
-                    } 
+                    a.replaceWith(_.template($("#is-favorite-true").html(),{}));                    
+                }
+            });
+            return false;
+        },
+        setIsFavoriteFalse: function (el) {
+            var image = $(el.srcElement).parents('.image[data-id]');
+            var id = image.attr('data-id');
+            $.ajax({
+                url: '/api/v1/favorites/'+id,
+                type: 'DELETE',
+                error: function(data) {
+                    $['.flash-msg']
+                        .addClass('error')
+                        .html('Communication errors. Please retry later');
+                },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    var image = $('[data-id="'+data.id+'"]');
+                    var a = image.find('div[data-action="setIsFavorite"]');
+                    a.replaceWith(_.template($("#is-favorite-false").html(),{}));                    
                 }
             });
             return false;
@@ -72,7 +80,7 @@
                 url: '/api/v1/favorites/'+id,
                 data: data,
                 dataType: 'text',
-                type: 'POST',
+                type: 'PUT',
                 error: function(data) {
                     $['.flash-msg']
                         .addClass('error')
@@ -107,7 +115,7 @@
                 url: '/api/v1/favorites/'+id,
                 data: data,
                 dataType: 'text',
-                type: 'POST',
+                type: 'PUT',
                 error: function(data) {
                     $['.flash-msg']
                         .addClass('error')
