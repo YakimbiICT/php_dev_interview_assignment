@@ -9,10 +9,12 @@ class BaseApplication
 {
     private $request;
     private $rootDir;
+    private $config;
     
     public function __construct()
     {
         $this->rootDir = __DIR__.'/../../..';
+        $this->config = new Service\Config();
     }
 
     protected function getRequest()
@@ -23,6 +25,11 @@ class BaseApplication
     protected function getRouteDir()
     {
         return $this->rootDir;
+    }
+    
+    protected function getConfig()
+    {
+        return $this->config;
     }
     
     public function run(Request $request = null)

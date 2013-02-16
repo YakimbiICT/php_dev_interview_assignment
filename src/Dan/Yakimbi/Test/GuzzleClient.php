@@ -12,6 +12,10 @@ class GuzzleClient extends BaseGuzzleClient
         
     }
     
+    public function setBaseUrl($url) {
+        return $this;
+    }
+    
     public function get($uri = null, $headers = null, $body = null)
     {
         return new Request();

@@ -3,6 +3,8 @@ vendor/*
 data/*
 cache/*
 
+config/config.yml
+
 !.gitkeep
 
 

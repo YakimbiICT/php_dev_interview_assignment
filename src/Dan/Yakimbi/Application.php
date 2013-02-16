@@ -15,16 +15,11 @@ class Application extends BaseApplication
     
     private function getGuzzleClient()
     {
-        if ($this->guzzleClient) {
-        
-            return $this->guzzleClient;
+        if (!$this->guzzleClient) {
+            $this->guzzleClient = new GuzzleClient();
         }
-        $api_key = 'af61ea011bda41aabe9617ba4af884f4';
-        $guzzleClient = new GuzzleClient(
-                'http://api.flickr.com/services/rest?api_key='.$api_key.'&format=json'
-            );
         
-        return $guzzleClient;
+        return $this->guzzleClient;
     }
     
     protected function getResponse()
@@ -63,8 +58,7 @@ class Application extends BaseApplication
             return new Response('Method not allowed', 405);
         }
         
-        $guzzleClient = $this->getGuzzleClient();
-        $flickr = new Service\FlickrService($guzzleClient);
+        $flickr = new Service\FlickrService($this->getGuzzleClient());
         $images = $flickr->getRandomImages(20);
 
         return $this->render('home.html.twig', array(
@@ -100,8 +94,7 @@ class Application extends BaseApplication
         if ($request->getMethod() != 'GET') {
             return new Response('Method not allowed', 405);
         }
-        $guzzleClient = $this->getGuzzleClient();
-        $flickr = new Service\FlickrService($guzzleClient);
+        $flickr = new Service\FlickrService($this->getGuzzleClient());
         $images = $flickr->getRandomImages(20);
 
         return new Response(json_encode($images));

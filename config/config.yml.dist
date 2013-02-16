@@ -1,0 +1,4 @@
+flickr:
+  api:
+    key: [YOUR_API_KEY]
+    url: http://api.flickr.com/services/rest?api_key={api_key}&format=json

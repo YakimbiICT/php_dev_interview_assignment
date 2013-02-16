@@ -12,14 +12,22 @@ class FlickrService {
     
     private $guzzleClient;
     
-    public function __construct(GuzzleClient $guzzleClient) {
-        $this->guzzleClient = $guzzleClient;
+    public function __construct(GuzzleClient $guzzleClient = null) {
+        
+        $config = new Config();
+        $guzzleClient->setBaseUrl(    
+            strtr($config->get('flickr.api.url'),array(
+                '{api_key}' => $config->get('flickr.api.key')
+            ))
+        );
         
         $adapter = new DoctrineCacheAdapter(new FilesystemCache(__DIR__.'/../../../../cache'));
 //        $adapter = new NullCacheAdapter();
         $cache = new CachePlugin($adapter, true);
 
-        $this->guzzleClient->addSubscriber($cache);
+        $guzzleClient->addSubscriber($cache);
+        
+        $this->guzzleClient = $guzzleClient;
     }
     
     public function getRandomImages($num=20)

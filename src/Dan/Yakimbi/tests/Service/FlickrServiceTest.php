@@ -7,7 +7,7 @@ use Dan\Yakimbi\Test\GuzzleClient;
 class FlickrServiceTest extends \PHPUnit_Framework_TestCase
 {
     
-    public function testHome()
+    public function testGetRandomImages()
     {
         $guzzleClient = new GuzzleClient();
         $service = new FlickrService($guzzleClient);
