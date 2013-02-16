@@ -41,10 +41,25 @@ class APIClient
         $favorite = array(
             'id' => $id,
             'url' => $url,
-            'isFavorite' => true,
             'description' => $description,
         );
-        $request = $this->guzzleClient->post('favorites/'.$id, null, json_encode($favorite));
+        $request = $this->guzzleClient->put('favorites/'.$id, null, json_encode($favorite));
+        
+        $response = $request->send();
+        if ($response->isSuccessful()) {
+            try {
+                return json_decode($response->getBody());
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        } else {
+            return 'ERROR';
+        }
+    }
+    
+    public function removeFavorite($id)
+    {
+        $request = $this->guzzleClient->delete('favorites/'.$id);
         
         $response = $request->send();
         if ($response->isSuccessful()) {

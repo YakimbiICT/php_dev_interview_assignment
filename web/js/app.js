@@ -22,7 +22,7 @@
             $.ajax({
                 url: '/api/v1/favorites/'+id,
                 data: data,
-                dataType: 'text',
+                dataType: 'json',
                 type: 'PUT',
                 error: function(data) {
                     $['.flash-msg']
@@ -30,7 +30,6 @@
                         .html('Communication errors. Please retry later');
                 },
                 success: function (data) {
-                    data = JSON.parse(data);
                     var image = $('[data-id="'+data.id+'"]');
                     var a = image.find('div[data-action="setIsFavorite"]');
                     a.replaceWith(_.template($("#is-favorite-true").html(),{}));                    
@@ -50,7 +49,6 @@
                         .html('Communication errors. Please retry later');
                 },
                 success: function (data) {
-                    data = JSON.parse(data);
                     var image = $('[data-id="'+data.id+'"]');
                     var a = image.find('div[data-action="setIsFavorite"]');
                     a.replaceWith(_.template($("#is-favorite-false").html(),{}));                    
@@ -79,7 +77,7 @@
             $.ajax({
                 url: '/api/v1/favorites/'+id,
                 data: data,
-                dataType: 'text',
+                dataType: 'json',
                 type: 'PUT',
                 error: function(data) {
                     $['.flash-msg']
@@ -87,7 +85,6 @@
                         .html('Communication errors. Please retry later');
                 },
                 success: function (data) {
-                    data = JSON.parse(data);
                     var image = $('[data-id="'+data.id+'"]');
                     var div = image.find('div[data-action="setDescription"]');
                     if (data.description) {
@@ -114,7 +111,7 @@
             $.ajax({
                 url: '/api/v1/favorites/'+id,
                 data: data,
-                dataType: 'text',
+                dataType: 'json',
                 type: 'PUT',
                 error: function(data) {
                     $['.flash-msg']
@@ -122,7 +119,6 @@
                         .html('Communication errors. Please retry later');
                 },
                 success: function (data) {
-                    data = JSON.parse(data);
                     var image = $('[data-id="'+data.id+'"]');
                     var div = image.find('div[data-action="setDescription"]');
                     if (data.description) {
@@ -133,7 +129,7 @@
                 }
             });
             return false;
-        },
+        }
         
     });
     

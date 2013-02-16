@@ -99,10 +99,11 @@ class Application extends BaseApplication
         }
         
         $client = new Service\APIClient();
-//        return new Response(var_dump($client->getRandomImages()));
+        return new Response(var_dump($client->getRandomImages()));
 //        return new Response(var_dump($client->setFavorite('8478239175','http://farm9.staticflickr.com/8383/8478239175_52ddd49a21_m.jpg', 'asdfasdf')));
-//        return new Response(var_dump($client->setFavorite('8478239175','http://farm9.staticflickr.com/8383/8478239175_52ddd49a21_m.jpg')));
-        return new Response(var_dump($client->getFavorites()));
+//        return new Response(var_dump($client->setFavorite('8478239175','http://farm9.staticflickr.com/8383/8478239175_52ddd49a21_m.jpg', '')));
+//        return new Response(var_dump($client->removeFavorite('8478239175')));
+//        return new Response(var_dump($client->getFavorites()));
     }
     
     public function apiRandomImagesAction()
@@ -115,7 +116,7 @@ class Application extends BaseApplication
         $flickr = new Service\FlickrService($this->getGuzzleClient());
         $images = $flickr->getRandomImages(20);
 
-        return new Response(json_encode($images));
+        return $this->createApiResponse($images);
         
     }
 
@@ -133,9 +134,10 @@ class Application extends BaseApplication
                 $image->bind(json_decode($request->getContent()));
                 $imageMan->save($image);
 
-                return new Response(json_encode($image->toArray()));
+                return $this->createApiResponse($image->toArray());
             } catch (\Exception $e) {
-                return new Response('Bad request', 400);
+        
+                return $this->createApiErrorResponse('Bad request', 400);
             }
         }
         
@@ -148,14 +150,14 @@ class Application extends BaseApplication
             try {
                 $imageMan->remove($image);
 
-                return new Response(json_encode($image->toArray()));
+                return $this->createApiResponse($image->toArray());
             } catch (\Exception $e) {
                 
-                return new Response('Bad request', 400);
+                return $this->createApiErrorResponse('Bad request', 400);
             }
         }
         
-        return new Response('Method not allowed', 405);
+        return $this->createApiErrorResponse('Method not allowed', 405);
     }
     
     
@@ -164,7 +166,7 @@ class Application extends BaseApplication
         $request = $this->getRequest();
         
         if ($request->getMethod() != 'GET') {
-            return new Response('Method not allowed', 405);
+            return $this->createApiErrorResponse('Method not allowed', 405);
         }
 
         $imageMan = new Model\ImageManager();
@@ -177,6 +179,17 @@ class Application extends BaseApplication
             $images[$i] = $image->toArray();
         }
         
-        return new Response(json_encode($images));
+        return $this->createApiResponse($images);
+    }
+    
+    private function createApiResponse($data, $code = 200)
+    {
+        return new Response(json_encode($data), $code, array('Content-Type' => 'application/json'));
+    }
+    
+    private function createApiErrorResponse($message, $code)
+    {
+        $data = array('error' => $message);
+        return new Response(json_encode($data), $code, array('Content-Type' => 'application/json'));
     }
 }
