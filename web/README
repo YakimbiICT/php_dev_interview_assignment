@@ -1,0 +1,13 @@
+ImageHostingService
+
+Installation:
+1. configure database settings in the config.php file;
+2. open index.html in the browser and enjoy.
+
+for more documentation see doc/ImageHostingService.txt
+see live example at http://imagehosting.zar.tj/
+
+TODOs:
+1. add database control model
+2. improve error handling system
+3. add unit tests....

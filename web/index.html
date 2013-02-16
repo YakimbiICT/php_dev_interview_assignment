@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" type="text/css" href="content/styles/style.css"/>
+        <link rel="stylesheet" type="text/css" href="content/libs/fancybox2/jquery.fancybox.css" media="screen" />
+
+        <title>Image Hosting Service</title>
+    </head>
+    <body>
+        <div id="bodydiv">
+            <div id="header">
+                <h1>Image Hosting Service</h1>
+                <h3>View random images, save your favorite!</h3>
+                <hr/>
+            </div>
+
+            <div id="content">
+                <h2>Favorite Images</h2>
+                <h4 id="favoriteStatus">There are no favorite images yet</h4>
+
+                <div id="favoriteList"></div>
+
+                <div class="clear"></div>
+
+                <hr/>
+                <h2>Random Images</h2>
+                <h4 id="randomStatus">There are no images yet. Press generate button to generate new images</h4>
+
+                <div id="randomList"></div>
+
+                <div id="generateButtons">
+                    <hr/>
+                    <button id="flikrGenerate">generate Flikr pics</button>
+                    <button id="instagramGenerate">generate Instagram pics</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: none;">
+            <div id="descriptionPanel">
+                <p>
+                    Description will appear on the hover of the image
+                </p>
+                <br/>
+                <form id="descriptionForm" action="javascript:void(0)" method="post">
+                    <textarea id="descriptionText"></textarea><br/>
+                    <input type="submit" value="add description" />
+                </form>
+            </div>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="content/libs/fancybox2/jquery.fancybox.pack.js"></script>
+        <script src="content/scripts/imagehosting.js"></script>
+
+    </body>
+</html>

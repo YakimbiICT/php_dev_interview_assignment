@@ -1,0 +1,11 @@
+ImageHostingService Android Application
+
+Installation:
+1. Import Android Application Project
+2. setup android SDK build target in AndroidManifest.xml
+3. run and enjoy
+
+see builded APK file in built/ directory
+
+P.S:
+application UI is very simple, pay attention on code structure.

@@ -1,0 +1,11 @@
+﻿RewriteEngine On
+
+RewriteRule ^api/flikr(/?)$ api.php?mod=flikr [L]
+RewriteRule ^api/instagram(/?)$ api.php?mod=instagram [L]
+RewriteRule ^api/favorite/([a-zA-Z0-9_-]+)/description/add/$ api.php?mod=favorite&act=description&seact=add&id=$1 [L]
+RewriteRule ^api/favorite/([a-zA-Z0-9_-]+)/description/add/([^/]*)(/?)$ api.php?mod=favorite&act=description&seact=add&id=$1&text=$2 [L]
+RewriteRule ^api/favorite/([a-zA-Z0-9_-]+)/description/remove/([^/]*)(/?)$ api.php?mod=favorite&act=description&seact=remove&id=$1&text=$2 [L]
+RewriteRule ^api/favorite/add/([a-zA-Z0-9_-]+)(/?)$ api.php?mod=favorite&act=add&id=$1 [L]
+RewriteRule ^api/favorite/remove/([a-zA-Z0-9_-]+)(/?)$ api.php?mod=favorite&act=remove&id=$1 [L]
+RewriteRule ^api/favorite(/?)$ api.php?mod=favorite [L]
+RewriteRule ^api(/?)$ api.php [L]

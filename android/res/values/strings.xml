@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ImageHostingService</string>
+    <string name="menu_settings">Settings</string>
+    <string name="add_description">add description</string>
+    <string name="add_image_description">Add image description:</string>
+    <string name="favorite_images">Favorite Images</string>
+    <string name="remove">remove</string>
+    <string name="random_images">Random Images</string>
+    <string name="set_favorite">set favorite</string>
+    <string name="generate_from_flikr">Generate from Flikr</string>
+    <string name="generate_from_instagram">Generate from Instagram</string>
+    <string name="description_has_been_added">Description has been added</string>
+    <string name="image_has_been_removed_from_favorite_list">Image has been removed from favorite list</string>
+    <string name="no_images_to_remove">No Images to remove! Add favorite images first!</string>
+    <string name="no_images_to_add_description">No Images to add description to! Add favorite images first!</string>
+    <string name="image_set_as_a_favorite">Image has been set as a favorite image</string>
+    <string name="nothing_to_set_as_favorite">Nothing to set as favorite! Generate new images!</string>
+
+</resources>
