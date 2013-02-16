@@ -1,0 +1,34 @@
+name: ImageHostingService
+author: Umed Khudoiberdiev <info@zar.tj>
+description:
+
+Image Hosting Service provides functionality to generate images from external services (Flikr, Instagram),
+storage generated image links in the database, allows to set them as favorite and add custom user descriptions.
+
+application infrastructure:
+
+/component - contains system components (each component dependency free);
+/content - client side content, styles, scripts and other client resources;
+/lib - contains third party php libraries;
+/module/imagehosting - contains classes according to specific module (ImageHostingService);
+/doc - system's documentation resources;
+
+/api.php - handles api calls to the application's components;
+/config.php - holds application configuration;
+/index.html - provides user startup interface;
+/.htaccess - provides basic address rewrites for api.php file;
+/README - just read it.
+
+Image Hosting Service API:
+
+/api/ 						                Get list of random images
+/api/flikr/                                 Generate new random images from flikr
+/api/instagram/                             Generate new random images from instagram
+/api/favorite/                              Get list of favorite images
+/api/favorite/add/{id}/                     Add new favorite image with id = {id}
+/api/favorite/remove/{id}/                  Remove favorite image with id = {id}
+
+/api/favorite/{id}/description/add/?text={text}  Add description {text} to the favorite image with id = {id}
+                                                        Please note that {text} param should be send by POST method
+
+/api/favorite/{id}/description/remove/   Remove description from the favorite image with id = {id}
