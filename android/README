@@ -5,7 +5,7 @@ Installation:
 2. setup android SDK build target in AndroidManifest.xml
 3. run and enjoy
 
-see builded APK file in bin/ directory
+see builded APK file in built/ directory
 
 P.S:
 application UI is very simple, pay attention on code structure.
