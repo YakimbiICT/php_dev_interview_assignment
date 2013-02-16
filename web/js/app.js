@@ -25,8 +25,8 @@
             var image = $(el.srcElement).parents('.image[data-id]');
             var id = image.attr('data-id');
             var url = image.find('img').attr('src');
-            var pageUrl = image.find('a').attr('href');
-            var data = JSON.stringify({id: id, isFavorite: isFavorite, url: url, pageUrl: pageUrl});
+            var link = image.find('a').attr('href');
+            var data = JSON.stringify({id: id, isFavorite: isFavorite, url: url, link: link});
             $.ajax({
                 url: '/api/v1/favorites/'+id,
                 data: data,

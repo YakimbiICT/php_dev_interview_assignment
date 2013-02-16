@@ -54,8 +54,8 @@ class FlickrService {
                 '{id}' => $photo->id,
                 '{secret}' => $photo->secret,
             ));
-            $pageUrl = 'http://www.flickr.com/photos/{owner}/{id}/';
-            $photos[$i]->pageUrl = strtr($pageUrl, array(
+            $link = 'http://www.flickr.com/photos/{owner}/{id}/';
+            $photos[$i]->link = strtr($link, array(
                 '{owner}' => $photo->owner,
                 '{id}' => $photo->id,
             ));
