@@ -34,6 +34,9 @@ class Application extends BaseApplication
         if (preg_match('/^\/favorites[\/]?$/',$route, $matches)) {
             return $this->favoritesAction();
         }
+        if (preg_match('/^\/api_client_test[\/]?$/',$route)) {
+            return $this->apiClientTestAction();
+        }
         
         if (preg_match('/^\/api\/v1\/random_images[\/]?$/',$route)) {
             return $this->apiRandomImagesAction();
@@ -87,6 +90,21 @@ class Application extends BaseApplication
         ));
     }
     
+    public function apiClientTestAction()
+    {
+        $request = $this->getRequest();
+        
+        if ($request->getMethod() != 'GET') {
+            return new Response('Method not allowed', 405);
+        }
+        
+        $client = new Service\APIClient();
+//        return new Response(var_dump($client->getRandomImages()));
+//        return new Response(var_dump($client->setFavorite('8478239175','http://farm9.staticflickr.com/8383/8478239175_52ddd49a21_m.jpg', 'asdfasdf')));
+//        return new Response(var_dump($client->setFavorite('8478239175','http://farm9.staticflickr.com/8383/8478239175_52ddd49a21_m.jpg')));
+        return new Response(var_dump($client->getFavorites()));
+    }
+    
     public function apiRandomImagesAction()
     {
         $request = $this->getRequest();
@@ -125,8 +143,10 @@ class Application extends BaseApplication
 
     
     
-    public function apiImagesAction()
+    public function apiFavoritesAction()
     {
+        $request = $this->getRequest();
+        
         if ($request->getMethod() != 'GET') {
             return new Response('Method not allowed', 405);
         }

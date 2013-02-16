@@ -14,6 +14,10 @@ class FlickrService {
     
     public function __construct(GuzzleClient $guzzleClient = null) {
         
+        if (!$guzzleClient) {
+            $guzzleClient = new GuzzleClient();
+        }
+        
         $config = new Config();
         $guzzleClient->setBaseUrl(    
             strtr($config->get('flickr.api.url'),array(
