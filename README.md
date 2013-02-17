@@ -139,7 +139,7 @@ phing install
             <td>GET</td>
             <td><em>empty</em></td>
             <td>
-                Get a collection of random images
+                Get a collection of random images<br/>
                 from an external service (Flickr).
             </td>
          </tr>
@@ -148,7 +148,7 @@ phing install
             <td>GET</td>
             <td><em>empty</em></td>
             <td>
-                Get the collection of all favorites
+                Get the collection of all favorites<br/>
                 images of the user.
             </td>
          </tr>
@@ -165,8 +165,8 @@ phing install
                 }
             </td>
             <td>
-                Store the metadata of a favorite image.
-                If you omit some data, these ones will
+                Store the metadata of a favorite image.<br/>
+                If you omit some data, these ones will<br/>
                 not be changed.
             </td>
          </tr>
