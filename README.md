@@ -49,7 +49,7 @@ can design and implement the API however you want. Of course, we'd also like to 
 # Implementation
 
 ## Demo
-You can see the application in action at [[ http://yakimbi.danilosanchi.net ]]
+You can see the application in action at http://yakimbi.danilosanchi.net
 
 ## System Requirment
 
@@ -122,4 +122,25 @@ git clone git@github.com:danielsan80/php_dev_interview_assignment.git
 cd php_dev_interview_assignment
 phing install
 ```
+
+## API interface
+<table>
+    <thead>
+        <tr>
+            <th>URI</th>
+            <th>Method</th>
+            <th>Body</th>
+            <th>Description</th>
+         </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>random_images</th>
+            <th>GET</th>
+            <th>**Empty**</th>
+            <th>Get a collection of random images from an external service (Flickr)</th>
+         </tr>
+     </tbody>
+</table
+
 
