@@ -123,7 +123,7 @@ cd php_dev_interview_assignment
 phing install
 ```
 
-## API interface
+## API
 This is the REST based API. The base url for the http requests is *http://{domain}/api/v1*.
 
 
@@ -223,10 +223,13 @@ You can do all the above using calls as follow:
 
   PUT /favorites/{unique-id} **body:**{ description: '' }
 
-## API Client
+### API Client
 
 The class *Dan\Yakimbi\Service\APIClient* implements a simple PHP client for the API.
 It depends on Guzzle library.
 
 The route */api_client_test* defined in *Dan\Yakimbi\Application::apiClientTestAction()*
 use the APIClient for example.
+
+The file */web/js/app.js* implements the client side application with Backbone.js.
+It use a part of the API to implement ajax interactions.
