@@ -163,7 +163,6 @@ phing install
             <td>Store the metadata of a favorite image. If you omit some data, these ones will not be changed.</td>
          </tr>
         <tr>
-            <td ></td>
             <td>DELETE</td>
             <td>
                 <em>empty</em>
