@@ -135,12 +135,18 @@ phing install
     </thead>
     <tbody>
         <tr>
-            <th>random_images</th>
-            <th>GET</th>
-            <th>**Empty**</th>
-            <th>Get a collection of random images from an external service (Flickr)</th>
+            <td>/random_images</td>
+            <td>GET</td>
+            <td>*Empty*</td>
+            <td>Get a collection of random images from an external service (Flickr)</td>
+         </tr>
+        <tr>
+            <td>/favorites</td>
+            <td>GET</td>
+            <td>*Empty*</td>
+            <td>Get the collection of all favorites images of the user</td>
          </tr>
      </tbody>
-</table
+</table>
 
 
