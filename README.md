@@ -145,7 +145,8 @@ This is the REST based API. The base url for the http requests is *http://{domai
                 Get a collection of 20 random images<br/>
                 from an external service (Flickr).<br/>
                 <em>
-                    Ex: GET http://yakimbi.danilosanchi.net/api/v1/random_images
+                    Example:<br/>
+                    GET http://yakimbi.danilosanchi.net/api/v1/random_images
                 </em>
             </td>
          </tr>
@@ -157,7 +158,8 @@ This is the REST based API. The base url for the http requests is *http://{domai
                 Get the collection of all favorites<br/>
                 images of the user.<br/>
                 <em>
-                    Ex: GET http://yakimbi.danilosanchi.net/api/v1/favorites
+                    Example:<br/>
+                    GET http://yakimbi.danilosanchi.net/api/v1/favorites
                 </em>
             </td>
          </tr>
@@ -178,7 +180,8 @@ This is the REST based API. The base url for the http requests is *http://{domai
                 If you omit some data, these ones will<br/>
                 not be changed.<br/>
                 <em>
-                    Ex: PUT http://yakimbi.danilosanchi.net/api/v1/favorites/1234567
+                    Example: PUT<br/>
+                    http://yakimbi.danilosanchi.net/api/v1/favorites/1234
                 </em>
             </td>
          </tr>
@@ -190,7 +193,8 @@ This is the REST based API. The base url for the http requests is *http://{domai
             <td>
                 Remove a favorite image.<br/>
                 <em>
-                    Ex: DELETE http://yakimbi.danilosanchi.net/api/v1/favorites/1234567
+                    Example:<br/>
+                    DELETE http://yakimbi.danilosanchi.net/api/v1/favorites/1234
                 </em>
             </td>
          </tr>
@@ -219,7 +223,7 @@ You can do all the above using calls as follow:
 
   PUT /favorites/{unique-id} **body:**{ description: '' }
 
-** API Client
+## API Client
 
 The class *Dan\Yakimbi\Service\APIClient* implements a simple PHP client for the API.
 It depends on Guzzle library.
