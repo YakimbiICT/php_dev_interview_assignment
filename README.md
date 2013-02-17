@@ -124,6 +124,9 @@ phing install
 ```
 
 ## API interface
+This is the REST based API. The base url for the http requests is *http://{domain}/api/v1*.
+
+
 <table>
     <thead>
         <tr>
@@ -140,7 +143,10 @@ phing install
             <td><em>empty</em></td>
             <td>
                 Get a collection of 20 random images<br/>
-                from an external service (Flickr).
+                from an external service (Flickr).<br/>
+                <em>
+                    Ex: GET http://yakimbi.danilosanchi.net/api/v1/random_images
+                </em>
             </td>
          </tr>
         <tr>
@@ -149,7 +155,10 @@ phing install
             <td><em>empty</em></td>
             <td>
                 Get the collection of all favorites<br/>
-                images of the user.
+                images of the user.<br/>
+                <em>
+                    Ex: GET http://yakimbi.danilosanchi.net/api/v1/favorites
+                </em>
             </td>
          </tr>
         <tr>
@@ -167,7 +176,10 @@ phing install
             <td>
                 Store the metadata of a favorite image.<br/>
                 If you omit some data, these ones will<br/>
-                not be changed.
+                not be changed.<br/>
+                <em>
+                    Ex: PUT http://yakimbi.danilosanchi.net/api/v1/favorites/1234567
+                </em>
             </td>
          </tr>
         <tr>
@@ -175,7 +187,12 @@ phing install
             <td>
                 <em>empty</em>
             </td>
-            <td>Remove a favorite image.</td>
+            <td>
+                Remove a favorite image.<br/>
+                <em>
+                    Ex: DELETE http://yakimbi.danilosanchi.net/api/v1/favorites/1234567
+                </em>
+            </td>
          </tr>
      </tbody>
 </table>
@@ -188,10 +205,10 @@ You can do all the above using calls as follow:
   GET /random_images
 * **AS a user, I WANT TO favorite an image**
 
-  PUT /favorites/{unique-id} { url: *url* }
+  PUT /favorites/{unique-id} **body:**{ url: *url* }
 * **AS a user, I WANT TO add a description to a favourite image.**
 
-  PUT /favorites/{unique-id} { description: *description* }
+  PUT /favorites/{unique-id} **body:**{ description: *description* }
 * **AS a user, I WANT TO view favorite images.**
 
   GET /favorites
@@ -200,6 +217,12 @@ You can do all the above using calls as follow:
   DELETE /favorites/{unique-id}
 * **AS a user, I WANT TO delete favorite image descriptions.**
 
-  PUT /favorites/{unique-id} { description: '' }
+  PUT /favorites/{unique-id} **body:**{ description: '' }
 
+** API Client
 
+The class *Dan\Yakimbi\Service\APIClient* implements a simple PHP client for the API.
+It depends on Guzzle library.
+
+The route */api_client_test* defined in *Dan\Yakimbi\Application::apiClientTestAction()*
+use the APIClient for example.
