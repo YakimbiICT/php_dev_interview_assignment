@@ -150,7 +150,7 @@ phing install
             <td rowspan="2" >/favorites/{id}</td>
             <td>PUT</td>
             <td>
-                <pre>
+                <code>
                     {
                         id: <em>id</em>,
                         url: <em>url</em>,
@@ -158,7 +158,7 @@ phing install
                         link: <em>link</em>,
                         description: <em>description</em>                            
                     }
-                </pre>
+                </code>
             </td>
             <td>Store the metadata of a favorite image. If you omit some data, these ones will not be changed.</td>
          </tr>
