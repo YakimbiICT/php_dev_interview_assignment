@@ -184,16 +184,22 @@ You can do all the above using calls as follow:
 
 * **AS a user, I WANT TO fetch 20 random images data from the choosen external service.
   and see them on the homepage.**
+
   GET /random_images
 * **AS a user, I WANT TO favorite an image**
+
   PUT /favorites/{unique-id} { url: *url* }
 * **AS a user, I WANT TO add a description to a favourite image.**
+
   PUT /favorites/{unique-id} { description: *description* }
 * **AS a user, I WANT TO view favorite images.**
+
   GET /favorites
 * **AS a user, I WANT TO delete favorite images.**
+
   DELETE /favorites/{unique-id}
 * **AS a user, I WANT TO delete favorite image descriptions.**
+
   PUT /favorites/{unique-id} { description: '' }
 
 
