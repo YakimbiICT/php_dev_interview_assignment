@@ -137,13 +137,29 @@ phing install
         <tr>
             <td>/random_images</td>
             <td>GET</td>
-            <td>*Empty*</td>
+            <td><em>empty</em></td>
             <td>Get a collection of random images from an external service (Flickr)</td>
          </tr>
         <tr>
             <td>/favorites</td>
             <td>GET</td>
-            <td>*Empty*</td>
+            <td><em>empty</em></td>
+            <td>Get the collection of all favorites images of the user</td>
+         </tr>
+        <tr>
+            <td rowspan="2" >/favorites/{id}</td>
+            <td>PUT</td>
+            <td>
+                <pre>
+                    {
+                        id: <em>id</em>,
+                        url: <em>url</em>,
+                        isFavorite: <em>isFavorite</em>,
+                        link: <em>link</em>,
+                        description: <em>description</em>                            
+                    }
+                </pre>
+            </td>
             <td>Get the collection of all favorites images of the user</td>
          </tr>
      </tbody>
