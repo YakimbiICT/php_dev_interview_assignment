@@ -17,10 +17,15 @@ set  :use_sudo,      false
 set :copy_exclude, [".git", ".DS_Store", ".gitignore", ".gitmodules"]
 
 set :shared_children, ["data", "vendor", "config"]
-set :shared_files,    []
+set :shared_files,    ["/config/config.yml"]
 
 
 after "deploy:symlink" do
+    run "cp #{shared_path}/config/config.yml #{shared_path}/config/config.yml~"
+    run "cp -a #{release_path}/config/config.yml.dist #{shared_path}/config/config.yml"
+    run "mv #{shared_path}/config/config.yml~ #{shared_path}/config/config.yml"
+    run "rm -Rf #{release_path}/config/config.yml"
+    run "ln -nfs #{shared_path}/config/config.yml #{release_path}/config/config.yml"
 
     run "rm -Rf #{release_path}/data"
     run "ln -nfs #{shared_path}/data #{release_path}/data"
