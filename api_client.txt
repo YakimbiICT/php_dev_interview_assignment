@@ -1,0 +1,128 @@
+PHP TEST API Client
+
+* getimages
+    Arguements:
+        - auth_key  : User authentication key
+        - searchtag : Search key word for image populating
+        - format (Optional, default JSON): Response format
+
+    Example Response:
+        {
+        "head":
+                {"status":1},
+        "body":{
+        "image_array":
+                [{"title":"WelshMountainZoo2011.10.08-21",
+                  "thumb":"http:\/\/farm9.staticflickr.com\/8505\/8480721619_150519f19a_q.jpg",
+                  "image":"http:\/\/farm9.staticflickr.com\/8505\/8480721619_150519f19a.jpg"},	
+
+                {"title":"WelshMountainZoo2011.10.08-57",
+                 "thumb":"http:\/\/farm9.staticflickr.com\/8241\/8480700257_acbd06fed6_q.jpg",
+                 "image":"http:\/\/farm9.staticflickr.com\/8241\/8480700257_acbd06fed6.jpg"},
+
+                {"title":"WelshMountainZoo2011.10.08-108",
+                 "thumb":"http:\/\/farm9.staticflickr.com\/8107\/8480674781_b423db662c_q.jpg",
+                 "image":"http:\/\/farm9.staticflickr.com\/8107\/8480674781_b423db662c.jpg"},
+        ……...
+        ………..
+        ………..
+
+        ]}}
+     
+
+* getfavouriteimages
+    Arguements:
+        - auth_key : User authentication key
+        - user_id : User id
+        - format (Optional, default JSON): Response format
+
+    Example Response:
+        {
+            "head":
+                    {"status":1},
+            "body":{
+                    "image_array":{
+                            "142":{
+                                    "title":"Keep your face to the sunshine and you cannot see a shadow. Helen Keller",
+                                    "thumb":"http:\/\/farm9.staticflickr.com\/8520\/8482969612_71efeb7257_q.jpg",
+                                    "image":"http:\/\/farm9.staticflickr.com\/8520\/8482969612_71efeb7257.jpg",
+                                    "description":"sample description"},
+                            "141":{
+                                    "title":"stark",
+                                    "thumb":"http:\/\/farm9.staticflickr.com\/8247\/8482950750_e75649b531_q.jpg",
+                                    "image":"http:\/\/farm9.staticflickr.com\/8247\/8482950750_e75649b531.jpg",
+                                    "description":""
+
+            …….
+            …….
+            …….
+
+            }}}}
+
+
+* favourite
+    Arguements:
+        - auth_key      : User authentication key
+        - user_id       : User id
+        - title         : Image title
+        - url           : Image url
+        - thumb         : Thumbnail image url
+        - description   : Image description
+        - format (Optional, default JSON): Response format
+
+    Example Response:
+        {
+        "head":{"status":1},
+        "body":{"id":"144"}
+        }
+
+
+* unfavourite
+    Arguements:
+        - auth_key  : User authentication key
+        - id        : Image ID
+        - format (Optional, default JSON): Response format
+
+    Example Response:
+        {
+        "head":{"status":1},
+        "body":[]
+        }
+
+* adddescription
+    Arguements:
+        - auth_key      : User authentication key
+        - id            : Image ID
+        - description   : Image description
+        - format (Optional, default JSON): Response format
+
+    Example Response:
+        {
+        "head":{"status":1},
+        "body":[]
+        }
+
+* removedescription
+    Arguements:
+        - auth_key      : User authentication key
+        - id            : Image ID
+        - format (Optional, default JSON): Response format
+
+    Example Response:
+        {
+        "head":{"status":1},
+        "body":[]
+        }
+
+* updatedescription
+    Arguements:
+        - auth_key      : User authentication key
+        - id            : Image ID
+        - description   : Image description
+        - format (Optional, default JSON): Response format
+
+    Example Response:
+        {
+        "head":{"status":1},
+        "body":[]
+        }

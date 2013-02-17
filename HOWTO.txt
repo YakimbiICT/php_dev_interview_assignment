@@ -1,0 +1,10 @@
+PHP TEST Configuration
+
+It's simple :)
+
+1. Create a MySQL database.
+2. Import phptest.sql file to it.
+3. Modify the values accordingly as necessary on config.php
+4. If you prefer, change the Flickr configuration parameters (Optional).
+
+That's it. App is ready :)
