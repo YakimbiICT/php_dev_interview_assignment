@@ -150,12 +150,12 @@ phing install
             <td rowspan="2" >/favorites/{id}</td>
             <td>PUT</td>
             <td>
-                {
-                   &nbsp;&nbsp; id:&nbsp;<em>id</em>,
-                   &nbsp;&nbsp; url:&nbsp;<em>url</em>,
-                   &nbsp;&nbsp; isFavorite:&nbsp;<em>isFavorite</em>,
-                   &nbsp;&nbsp; link:&nbsp;<em>link</em>,
-                   &nbsp;&nbsp; description:&nbsp;<em>description</em>
+                {<br/>
+                   &nbsp;&nbsp; id:&nbsp;<em>id</em>,<br/>
+                   &nbsp;&nbsp; url:&nbsp;<em>url</em>,<br/>
+                   &nbsp;&nbsp; isFavorite:&nbsp;<em>isFavorite</em>,<br/>
+                   &nbsp;&nbsp; link:&nbsp;<em>link</em>,<br/>
+                   &nbsp;&nbsp; description:&nbsp;<em>description</em><br/>
                 }
             </td>
             <td>Store the metadata of a favorite image. If you omit some data, these ones will not be changed.</td>
